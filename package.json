@@ -30,6 +30,7 @@
     "@hemjs/needle": "0.2.1",
     "@hemtypes/container": "0.1.2",
     "@hemtypes/core": "0.2.2",
+    "@hemtypes/express": "0.1.3",
     "@hemtypes/hooks": "0.1.2",
     "@hemtypes/http": "0.1.0",
     "@types/jest": "29.4.4",

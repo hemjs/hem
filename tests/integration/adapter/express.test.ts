@@ -1,5 +1,6 @@
 import { ExpressAdapter, ExpressModule } from '@hemjs/express';
 import { Needle } from '@hemjs/needle';
+import type { ExpressApplication } from '@hemtypes/express';
 import { Application, HemModule } from '../../../src';
 import { HTTP_ADAPTER } from '../../../src/constants';
 
@@ -18,7 +19,7 @@ describe('Adapter (Express Application)', () => {
       provide: HTTP_ADAPTER,
       useExisting: ExpressAdapter.name,
     });
-    const app = container.get<Application & ExpressAdapter>(Application.name);
+    const app = container.get<ExpressApplication>(Application.name);
     expect(app).toBeInstanceOf(Application);
     expect(app.getHttpAdapter()).toBeInstanceOf(ExpressAdapter);
     expect(app.getType()).toEqual('express');

@@ -1,12 +1,13 @@
 import { ExpressAdapter, ExpressModule } from '@hemjs/express';
 import { Needle } from '@hemjs/needle';
 import type { Container } from '@hemtypes/container';
+import type { ExpressApplication } from '@hemtypes/express';
 import { Application, HemModule } from '../../../src';
 import { HTTP_ADAPTER } from '../../../src/constants';
 
 describe('Options (Express Application)', () => {
   let container: Container;
-  let app: Application;
+  let app: ExpressApplication;
 
   beforeEach(() => {
     container = new Needle([
@@ -21,7 +22,7 @@ describe('Options (Express Application)', () => {
         useValue: { app: { options: {} } },
       },
     ]);
-    app = container.get<Application>(Application.name);
+    app = container.get<ExpressApplication>(Application.name);
   });
 
   it('should return when app options present', () => {

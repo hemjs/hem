@@ -1,11 +1,12 @@
 import { ExpressAdapter, ExpressModule } from '@hemjs/express';
 import { Needle } from '@hemjs/needle';
 import type { Container } from '@hemtypes/container';
+import type { ExpressApplication } from '@hemtypes/express';
 import { Application, HemModule, HTTP_ADAPTER } from '../../../src';
 
 describe('Listen (Express Application)', () => {
   let container: Container;
-  let app: Application;
+  let app: ExpressApplication;
 
   beforeEach(() => {
     container = new Needle([
@@ -16,7 +17,7 @@ describe('Listen (Express Application)', () => {
         useExisting: ExpressAdapter.name,
       },
     ]);
-    app = container.get<Application>(Application.name);
+    app = container.get<ExpressApplication>(Application.name);
   });
 
   afterEach(async () => {
@@ -39,7 +40,7 @@ describe('Listen (Express Application)', () => {
         useExisting: ExpressAdapter.name,
       },
     ]);
-    const secondApp = seocndContainer.get<Application>(Application.name);
+    const secondApp = seocndContainer.get<ExpressApplication>(Application.name);
     try {
       await secondApp.listen(4444);
     } catch (error: any) {
