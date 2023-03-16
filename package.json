@@ -1,0 +1,70 @@
+{
+  "name": "@hemjs/hem",
+  "version": "0.1.0",
+  "description": "A dependency injection based application framework for Node.js",
+  "author": "Augustus Kamau",
+  "license": "MIT",
+  "keywords": [
+    "hemjs",
+    "hem",
+    "framework"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "lint": "eslint \"{src,tests}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "prerelease": "npm run prebuild && npm run build",
+    "release": "release-it"
+  },
+  "dependencies": {
+    "@hemjs/notions": "0.1.1",
+    "iterare": "1.2.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.4.4",
+    "@commitlint/config-conventional": "17.4.4",
+    "@hemjs/express": "0.1.0",
+    "@hemjs/needle": "0.2.1",
+    "@hemtypes/container": "0.1.2",
+    "@hemtypes/core": "0.2.2",
+    "@hemtypes/hooks": "0.1.2",
+    "@hemtypes/http": "0.1.0",
+    "@types/jest": "29.4.4",
+    "@types/node": "18.15.3",
+    "@types/supertest": "2.0.12",
+    "@typescript-eslint/eslint-plugin": "5.55.0",
+    "@typescript-eslint/parser": "5.55.0",
+    "eslint": "8.36.0",
+    "eslint-config-prettier": "8.7.0",
+    "eslint-plugin-import": "2.27.5",
+    "husky": "8.0.3",
+    "jest": "29.5.0",
+    "lint-staged": "13.2.0",
+    "prettier": "2.8.4",
+    "release-it": "15.8.0",
+    "rimraf": "4.4.0",
+    "supertest": "6.3.3",
+    "ts-jest": "29.0.5",
+    "typescript": "4.9.5"
+  },
+  "homepage": "https://github.com/hemjs/hem#readme",
+  "bugs": {
+    "url": "https://github.com/hemjs/hem/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemjs/hem.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}
