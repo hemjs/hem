@@ -6,6 +6,7 @@ import { HTTP_ADAPTER } from './constants';
 import { HookCollector } from './hooks/hook-collector';
 import { HookContainer } from './hooks/hook-container';
 import { HookFactory } from './hooks/hook-factory';
+import { TaskExecutor } from './task/task-executor';
 
 export class HemModule {
   register(): { providers: Provider[] } {
@@ -50,7 +51,7 @@ export class HemModule {
               config.app?.options,
             );
             return this.createAdapterProxy(
-              this.createInstance(instance),
+              this.createTarget(instance),
               container.get<HttpAdapter>(HTTP_ADAPTER),
             );
           },
@@ -59,8 +60,8 @@ export class HemModule {
     };
   }
 
-  private createInstance<T>(instance: T): T {
-    return this.createProxy(instance);
+  private createTarget<T>(target: T): T {
+    return this.createProxy(target);
   }
 
   private createProxy(target: any) {
@@ -93,21 +94,18 @@ export class HemModule {
             ? proxy
             : result;
         };
-
         if (!(prop in receiver) && prop in adapter) {
-          return (...args: unknown[]) => {
+          return (...args: Array<unknown>) => {
             const result = this.createTaskExecutor(adapter, prop)(...args);
             return mapToProxy(result);
           };
         }
-
         if (isFunction(receiver[prop])) {
-          return (...args: unknown[]) => {
+          return (...args: Array<unknown>) => {
             const result = receiver[prop](...args);
             return mapToProxy(result);
           };
         }
-
         return receiver[prop];
       },
     });
@@ -118,14 +116,11 @@ export class HemModule {
     receiver: Record<string, any>,
     prop: string,
   ): Function {
-    return (...args: unknown[]) => {
+    return (...args: Array<unknown>) => {
       let result: unknown;
-      try {
+      TaskExecutor.execute(() => {
         result = receiver[prop](...args);
-      } catch (e) {
-        console.log(e);
-        process.exit(1);
-      }
+      });
       return result;
     };
   }
