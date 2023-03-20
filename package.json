@@ -1,6 +1,6 @@
 {
   "name": "@hemjs/hem",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A dependency injection based application framework for Node.js",
   "author": "Augustus Kamau",
   "license": "MIT",
