@@ -1,5 +1,6 @@
 import { isFunction } from '@hemjs/notions';
 import type { Container, Provider } from '@hemtypes/container';
+import type { Module } from '@hemtypes/hem';
 import type { HttpAdapter } from '@hemtypes/http';
 import { Application } from './application';
 import { HTTP_ADAPTER } from './constants';
@@ -8,7 +9,7 @@ import { HookContainer } from './hooks/hook-container';
 import { HookFactory } from './hooks/hook-factory';
 import { TaskExecutor } from './task/task-executor';
 
-export class HemModule {
+export class HemModule implements Module {
   register(): { providers: Provider[] } {
     return {
       providers: [
