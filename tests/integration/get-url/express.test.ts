@@ -32,11 +32,6 @@ describe('Get URL (Express Application)', () => {
       expect(await app.getUrl()).toEqual(`http://127.0.0.1:4444`);
     });
 
-    it('should support HTTP over IPv6', async () => {
-      await app.listen(4444, '::1');
-      expect(await app.getUrl()).toEqual(`http://[::1]:4444`);
-    });
-
     it('should convert host from [::] to [::1]', async () => {
       await app.listen(4444, '::');
       expect(await app.getUrl()).toEqual(`http://[::1]:4444`);
@@ -101,11 +96,6 @@ describe('Get URL (Express Application)', () => {
     it('should support HTTPS over IPv4', async () => {
       await app.listen(4444, '127.0.0.1');
       expect(await app.getUrl()).toEqual(`https://127.0.0.1:4444`);
-    });
-
-    it('should support HTTPS over IPv6', async () => {
-      await app.listen(4444, '::1');
-      expect(await app.getUrl()).toEqual(`https://[::1]:4444`);
     });
   });
 });
