@@ -42,6 +42,16 @@ jobs:
       - image: cimg/node:19.8
     steps:
       - checkout
+      - run:
+          name: enable ipv6
+          command: |
+            cat <<'EOF' | sudo tee /etc/docker/daemon.json
+            {
+              "ipv6": true,
+              "fixed-cidr-v6": "2001:db8:1::/64"
+            }
+            EOF
+            sudo service docker restart
       - *restore-cache
       - *install-deps
       - run:
