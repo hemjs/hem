@@ -26,8 +26,8 @@
   "devDependencies": {
     "@commitlint/cli": "17.5.0",
     "@commitlint/config-conventional": "17.4.4",
-    "@hemjs/express": "0.1.0",
-    "@hemjs/needle": "0.2.1",
+    "@hemjs/express": "0.1.2",
+    "@hemjs/needle": "0.2.2",
     "@hemtypes/container": "0.1.4",
     "@hemtypes/core": "0.2.4",
     "@hemtypes/express": "0.1.6",
