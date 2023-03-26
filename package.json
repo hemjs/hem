@@ -31,7 +31,7 @@
     "@hemtypes/container": "0.1.4",
     "@hemtypes/core": "0.2.4",
     "@hemtypes/express": "0.1.6",
-    "@hemtypes/hem": "0.1.2",
+    "@hemtypes/hem": "0.1.3",
     "@hemtypes/hooks": "0.1.3",
     "@hemtypes/http": "0.1.2",
     "@types/jest": "29.5.0",
