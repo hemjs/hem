@@ -1,10 +1,12 @@
-import { isFunction } from '@hemjs/notions';
+import { isFunction, isString } from '@hemjs/notions';
 import type { HttpAdapter } from '@hemtypes/http';
+import { platform } from 'os';
 import type { HookCollector } from './hooks/hook-collector';
 
 export class Application {
   protected httpServer: any;
   private isInitialized = false;
+  private isListening = false;
 
   constructor(
     private readonly httpAdapter: HttpAdapter,
@@ -71,6 +73,7 @@ export class Application {
 
           if (address) {
             this.httpServer.removeListener('error', errorHandler);
+            this.isListening = true;
             resolve(this.httpServer);
           }
 
@@ -82,6 +85,17 @@ export class Application {
     });
   }
 
+  public async getUrl(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      if (!this.isListening) {
+        reject('Server not listening!');
+        return;
+      }
+      const address = this.httpServer.address();
+      resolve(this.formatAddress(address));
+    });
+  }
+
   public async close(signal?: string): Promise<void> {
     await this.hookCollector.addBeforeShutdownHook(signal);
     await this.dispose();
@@ -90,5 +104,32 @@ export class Application {
 
   public async dispose(): Promise<void> {
     this.httpAdapter && (await this.httpAdapter.close());
+  }
+
+  private formatAddress(address: any): string {
+    if (isString(address)) {
+      if (platform() === 'win32') {
+        return address;
+      }
+      const basePath = encodeURIComponent(address);
+      return `${this.getProtocol()}+unix://${basePath}`;
+    }
+
+    let host = address.address;
+    if (address && address.family === 'IPv6') {
+      if (host === '::') {
+        host = '[::1]';
+      } else {
+        host = `[${host}]`;
+      }
+    } else if (host === '0.0.0.0') {
+      host = '127.0.0.1';
+    }
+
+    return `${this.getProtocol()}://${host}:${address.port}`;
+  }
+
+  private getProtocol(): 'http' | 'https' {
+    return this.appOptions && this.appOptions.httpsOptions ? 'https' : 'http';
   }
 }
