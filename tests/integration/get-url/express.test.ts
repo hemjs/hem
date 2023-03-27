@@ -9,7 +9,7 @@ import { Application, HemModule, HTTP_ADAPTER } from '../../../src';
 describe('Get URL (Express Application)', () => {
   describe('HTTP', () => {
     let container: Container;
-    let app: any;
+    let app: ExpressApplication;
 
     beforeEach(() => {
       container = new Needle([
@@ -60,7 +60,7 @@ describe('Get URL (Express Application)', () => {
 
   describe('HTTPS', () => {
     let container: Container;
-    let app: any;
+    let app: ExpressApplication;
 
     beforeEach(() => {
       const keyPath = join(__dirname, '/../fixtures/key.pem');
