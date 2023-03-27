@@ -70,7 +70,6 @@ export class Application {
           }
 
           const address = this.httpServer.address();
-
           if (address) {
             this.httpServer.removeListener('error', errorHandler);
             this.isListening = true;

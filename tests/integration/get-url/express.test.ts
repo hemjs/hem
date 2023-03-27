@@ -28,18 +28,18 @@ describe('Get URL (Express Application)', () => {
     });
 
     it('should support HTTP over IPv4', async () => {
-      await app.listen(4444, '127.0.0.1');
-      expect(await app.getUrl()).toEqual(`http://127.0.0.1:4444`);
+      await app.listen(4441, '127.0.0.1');
+      expect(await app.getUrl()).toEqual(`http://127.0.0.1:4441`);
     });
 
     it('should convert host from [::] to [::1]', async () => {
-      await app.listen(4444, '::');
-      expect(await app.getUrl()).toEqual(`http://[::1]:4444`);
+      await app.listen(4442, '::');
+      expect(await app.getUrl()).toEqual(`http://[::1]:4442`);
     });
 
     it('should convert host from 0.0.0.0 to 127.0.0.1', async () => {
-      await app.listen(4444, '0.0.0.0');
-      expect(await app.getUrl()).toEqual(`http://127.0.0.1:4444`);
+      await app.listen(4443, '0.0.0.0');
+      expect(await app.getUrl()).toEqual(`http://127.0.0.1:4443`);
     });
 
     it('should return 127.0.0.1 in a callback', async () => {
@@ -94,8 +94,8 @@ describe('Get URL (Express Application)', () => {
     });
 
     it('should support HTTPS over IPv4', async () => {
-      await app.listen(4444, '127.0.0.1');
-      expect(await app.getUrl()).toEqual(`https://127.0.0.1:4444`);
+      await app.listen(4445, '127.0.0.1');
+      expect(await app.getUrl()).toEqual(`https://127.0.0.1:4445`);
     });
   });
 });
