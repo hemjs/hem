@@ -29,7 +29,7 @@
     "@hemjs/express": "0.1.3",
     "@hemjs/needle": "0.2.3",
     "@hemtypes/container": "0.1.5",
-    "@hemtypes/core": "0.2.5",
+    "@hemtypes/core": "0.2.6",
     "@hemtypes/express": "0.1.7",
     "@hemtypes/hem": "0.1.4",
     "@hemtypes/hooks": "0.1.5",
