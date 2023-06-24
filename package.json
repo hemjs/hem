@@ -24,8 +24,8 @@
     "iterare": "1.2.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.6.5",
-    "@commitlint/config-conventional": "17.6.5",
+    "@commitlint/cli": "17.6.6",
+    "@commitlint/config-conventional": "17.6.6",
     "@hemjs/express": "0.1.4",
     "@hemjs/needle": "0.2.5",
     "@hemtypes/container": "0.1.6",
